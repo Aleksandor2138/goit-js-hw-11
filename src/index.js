@@ -1,11 +1,9 @@
 import Notiflix from 'notiflix';
 import { SerchPhoto } from "./js/server-request";
 import { cardCreat } from './js/card-img';
-// import './js/top.js';
+import './js/top.js';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
-
 
 
 const constHtml = {
@@ -21,8 +19,6 @@ let lightbox = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
 });
 document.querySelector('html').style.cssText = `scroll-behavior: smooth;`;
-
-// constHtml.body.insertAdjacentHTML('afterbegin', topBtnCrete);
 
 const serchPhoto = new SerchPhoto(40);
 
@@ -69,7 +65,6 @@ constHtml.form.addEventListener('submit', onSearch)
 
 const moreSearch = async () => {
     serchPhoto.page += 1;
-    
     try {
         const data = await serchPhoto.fetchPictures();
         const totalPages = Math.ceil(data.totalHits / serchPhoto.perPage);
@@ -78,7 +73,6 @@ const moreSearch = async () => {
         // console.log(data.hits.length);
         // console.log(serchPhoto.page);
         // console.log(totalPages);
-        
         if (serchPhoto.page === totalPages) {
             constHtml.more.classList.add('is-hidden');
         }
@@ -95,29 +89,3 @@ const clearContent = () => {
     constHtml.gallery.innerHTML = '';
 
 };
-
-const isHiden = (status) => {
-    if (status) {
-        constHtml.more.classList.add('is-hidden');
-    }
-    constHtml.more.classList.remove('is-hidden');
-}
-
-window.onscroll = function () {
-  scrollFunction();
-};
-
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    document.getElementById('myBtn').style.display = 'block';
-  } else {
-    document.getElementById('myBtn').style.display = 'none';
-  }
-}
-
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
-topFunction();

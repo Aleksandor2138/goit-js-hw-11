@@ -1,5 +1,5 @@
 .top-btn{
-    display: none;
+    // display: none;
     position: fixed;
     bottom: 20px;
     right: 30px;
@@ -21,4 +21,10 @@
 .top__svg{
     width: 45px;
     height: 45px;
+}
+
+.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
 }

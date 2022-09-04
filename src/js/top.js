@@ -1,34 +1,24 @@
-const body=document.querySelector('body')
+const topBtn = document.getElementById('myBtn');
 
-export { topBtnCrete }
+//  функция скрола для появления кнопки ТОР
+const trackScroll=()=> {
+    const scrolled = window.pageYOffset;
+    const coords = document.documentElement.clientHeight;
 
-// const topBtnCrete = () => {
-//     const topBtn = `
-//     <button class="top-btn" onclick="topFunction()"  id="myBtn" title="Go to top">
-//             <svg class="top__svg">
-//                 <use href="./images/icons.svg#icon-topUp"></use>
-//             </svg>
-//     </button>`;
-//     return topBtn;
-// }
-// body.insertAdjacentHTML('afterbegin', topBtnCrete());
+    if (scrolled > coords) {
+        topBtn.classList.remove('is-hidden');
+    }
+    if (scrolled < coords) {
+        topBtn.classList.add('is-hidden');
+    }
+}
+window.addEventListener('scroll', trackScroll);
 
-// button top   When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function () {
-    scrollFunction();
-};
-
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById('myBtn').style.display = 'block';
-    } else {
-        document.getElementById('myBtn').style.display = 'none';
+// функция скроля для плавного пролистывания вверх по клику по кнопке ТОР
+const backToTop=()=> {
+    if (window.pageYOffset > 0) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-topFunction();
+topBtn.addEventListener('click', backToTop);
